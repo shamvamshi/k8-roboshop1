@@ -27,18 +27,23 @@ spec:
         ports:
         - containerPort: 27017
 ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: mongodb-service
-# spec:
-#   type: ClusterIP  # Defines the exposure type
-#   selector:
-#     project: roboshop
-#     component: mongodb
-#     environment: database  # Finds all Pods with the label "app: secure-web"
-#   ports:
-#     - protocol: TCP
-#       port: 80         # The stable port exposed by this Service
-#       targetPort: 27017 # The internal container port receiving the traffic
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: mongodb
+    environment: database
+spec:
+  type: ClusterIP  # Defines the exposure type
+  selector:
+    project: roboshop
+    component: mongodb
+    environment: database  # Finds all Pods with the label "app: secure-web"
+  ports:
+    - protocol: TCP
+      port: 27017         # The stable port exposed by this Service
+      targetPort: 27017 # The internal container port receiving the traffic
 
