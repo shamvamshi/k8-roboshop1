@@ -5,7 +5,7 @@ metadata:
   namespace: roboshop
   labels:
     project: roboshop
-    component: user
+    component: cart
     environment: backend
 data:
   REDIS_HOST: "redis"
@@ -19,20 +19,20 @@ metadata:
   namespace: roboshop
   labels:
     project: roboshop
-    component: user
+    component: cart
     environment: backend
 spec:
   replicas: 3
   selector:
     matchLabels:
       project: roboshop
-      component: user
+      component: cart
       environment: backend
   template:
     metadata:
       labels:
         project: roboshop
-        component: user
+        component: cart
         environment: backend
     spec:
       containers:
@@ -49,15 +49,14 @@ metadata:
   namespace: roboshop
   labels:
     project: roboshop
-    component: user
+    component: cart
     environment: backend
 spec:
   type: ClusterIP
   selector:
-    labels:
-      project: roboshop
-      component: user
-      environment: backend
+    project: roboshop
+    component: cart
+    environment: backend
   ports:
   - name: cart
     protocol: TCP
