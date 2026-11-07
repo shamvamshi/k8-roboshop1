@@ -50,10 +50,9 @@ metadata:
   namespace: roboshop
 spec:
   selector:
-    labels:
-      project: roboshop
-      component: shipping
-      environment: backend
+    project: roboshop
+    component: shipping
+    environment: backend
   ports:
     - protocol: TCP
       port: 8080
