@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: payment
+    environment: backend
+data:
+  CART_HOST: cart
+  CART_PORT: 8080
+  USER_HOST: user
+  USER_PORT: 8080
+  AMQP_HOST: rabbitmq
+  AMQP_USER: roboshop
+  AMQP_PASS: roboshop123
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: payment
+    environment: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: roboshop
+      component: payment
+      environment: backend
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        component: payment
+        environment: backend
+    spec:
+      containers:
+      - name: payment
+        image: sham6779/payment:v1
+        envFrom:
+        - configMapRef:
+            name: payment
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: payment
+    environment: backend
+spec:
+  type: ClusterIP  # Defines the exposure type
+  selector:
+    project: roboshop
+    component: payment
+    environment: backend  # Finds all Pods with the label "app: secure-web"
+  ports:
+  - protocol: TCP
+    port: 8080         # The stable port exposed by this Service
+    targetPort: 8080 # The internal container port receiving the traffic
+
