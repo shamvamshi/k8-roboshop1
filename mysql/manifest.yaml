@@ -8,7 +8,7 @@ metadata:
     component: mysql
     environment: database
 type: Opaque
-Data:
+data:
   MYSQL_ROOT_PASSWORD: Um9ib1Nob3BAMQ==
 ---
 apiVersion: apps/v1
