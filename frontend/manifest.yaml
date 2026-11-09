@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: frontend
+  name: nginx-config
   namespace: roboshop
   labels:
     project: roboshop
@@ -98,14 +98,14 @@ spec:
       - name: frontend
         image: sham6779/frontend:v1
         volumeMounts:
-        - name: nginx.conf
+        - name: nginx-config
           mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf
           readOnly: true
       volumes:
-      - name: nginx.conf
+      - name: nginx-config
         configMap:
-          name: nginx.conf
+          name: nginx-config
           items:
           - key: nginx.conf
             path: nginx.conf
