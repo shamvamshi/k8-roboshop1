@@ -54,10 +54,11 @@ spec:
       containers:
       - name: payment
         image: sham6779/payment:v1
+        ports:
+        - containerPort: 8080
         envFrom:
         - configMapRef:
             name: payment
-        envFrom:
         - secretRef:
             name: payment
 ---
