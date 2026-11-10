@@ -51,6 +51,7 @@ spec:
         component: payment
         environment: backend
     spec:
+      enableServiceLinks: false
       containers:
       - name: payment
         image: sham6779/payment:v1
